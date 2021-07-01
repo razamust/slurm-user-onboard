@@ -15,10 +15,10 @@
         name: "{{ item }}"
         state: present
         when: 
-  -	"'slurmservers' in group_names or 'controller' in slurm_roles"
-  -	"'slurmexechosts' in group_names or 'exec' in slurm_roles"
+   -	"'slurmservers' in group_names or 'controller' in slurm_roles"
+   -	"'slurmexechosts' in group_names or 'exec' in slurm_roles"
         with_items: 
-  -	Docker
+   -	Docker
 
 - name: create user  John
   user:
