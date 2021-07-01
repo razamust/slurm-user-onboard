@@ -1,0 +1,35 @@
+---
+- name: Create Users & Groups
+  hosts: all
+  tasks:
+    - name: Create groups
+      groups:
+        name: "{{ item }}"
+        state: present
+        with_items: 
+   -	Commercial
+   -	Normal
+
+- name: Create docker group
+      groups:
+        name: "{{ item }}"
+        state: present
+        when: 
+  -	"'slurmservers' in group_names or 'controller' in slurm_roles"
+  -	"'slurmexechosts' in group_names or 'exec' in slurm_roles"
+        with_items: 
+  -	Docker
+
+- name: create user  John
+  user:
+    name: John
+    state: present
+    shell: /bin/bash
+    uid: "{{ item }}"
+    group: Commercial, Docker 
+    createhome: yes
+    home: /nas/user/1000
+  with_item: 1000
+  
+- name: Add linux ID to slurm cluster
+  command: sacctmgr create user name=<1000> cluster=cluster qos=<commercial> 
