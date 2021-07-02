@@ -15,9 +15,9 @@
         name: "{{ user_id }}"
         state: present
         when: 
-         -	"'slurmservers' in group_names or 'controller' in slurm_roles"
-         -	"'slurmexechosts' in group_names or 'exec' in slurm_roles"
-         -  "{{ docker_access is true }}" 
+         - "{{ docker_access is true }}" 
+         - "'slurmexechosts' in group_names or 'exec' in slurm_roles"
+         - "'slurmservers' in group_names or 'controller' in slurm_roles"
            
 - name: Add linux ID to slurm cluster
   command: sacctmgr create user name=<provided_linux_id> cluster=cluster qos=<user_qos_input> 
