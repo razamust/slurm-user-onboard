@@ -8,7 +8,7 @@
     state: present
     shell: /bin/bash
     createhome: yes
-    home: "{{ nas_path }}" 
+    home: "{{ nas_path }} / {{ user_id }} " 
 
 - name: Add user to docker  
       user:
@@ -16,9 +16,9 @@
         state: present
         when: 
          - "{{ docker_access is true }}" 
-         - "'slurmexechosts' in group_names 
-         - "'slurmservers' in group_names or 'controller' in slurm_roles"
+         - "'slurmexechosts' in group_names "
+         - "'slurmservers' in group_names "
            
 - name: Add linux ID to slurm cluster
-  command: sacctmgr create user name=<provided_linux_id> cluster=cluster qos=<user_qos_input> 
-  when: "'slurmservers' in group_names or 'controller' in slurm_roles"
+  command: sacctmgr create user name=< {{ user_id }} > cluster=cluster qos=< {{ user_qos_input }} > 
+  when: "'slurmservers' in group_names "
