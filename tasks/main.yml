@@ -16,7 +16,7 @@
         state: present
         when: 
          - "{{ docker_access is true }}" 
-         - "'slurmexechosts' in group_names or 'exec' in slurm_roles"
+         - "'slurmexechosts' in group_names 
          - "'slurmservers' in group_names or 'controller' in slurm_roles"
            
 - name: Add linux ID to slurm cluster
