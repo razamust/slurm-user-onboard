@@ -11,11 +11,12 @@
   user: 
     name: "{{ user_id }}"
     state: present
-    docker_access: "{{ true }}"
     when: 
-      - "'slurmexechosts' in group_names "
-      - "'slurmservers' in group_names "
+      - "'slurmcompute01' in group_names "
+      - "'slurmcontroller' in group_names "
+      - "{{ docker_access is true }}"
+      
 
 - name: "Add linux ID to slurm cluster"
-  when: "'slurmservers' in group_names "
+  when: "'slurmcontroller' in group_names "
   command: "sacctmgr create user name=< {{ user_id }} > cluster=cluster qos=< {{ user_qos_input }} >"
