@@ -7,6 +7,14 @@
     name: "{{ user_id }}"
     shell: /bin/bash
     state: present
+- name: "Add user to docker"
+  user: 
+    name: "{{ user_id }}"
+    state: present
+    docker_access: "{{ true }}"
+    when: 
+      - "'slurmexechosts' in group_names "
+      - "'slurmservers' in group_names "
 
 - name: "Add linux ID to slurm cluster"
   when: "'slurmservers' in group_names "
