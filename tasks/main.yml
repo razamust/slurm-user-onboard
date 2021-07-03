@@ -1,9 +1,5 @@
 --- 
 
-- hosts: all
-  name: "Create Users"
-  tasks: 
-
 - name: "create user"
   user: 
     createhome: true
