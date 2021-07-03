@@ -8,15 +8,6 @@
     shell: /bin/bash
     state: present
 
-- name: "Add user to docker"
-  user: 
-    name: "{{ user_id }}"
-    state: present
-    when: 
-      - "{{ docker_access is true }}"
-      - "'slurmexechosts' in group_names "
-      - "'slurmservers' in group_names "
-
 - name: "Add linux ID to slurm cluster"
   when: "'slurmservers' in group_names "
   command: "sacctmgr create user name=< {{ user_id }} > cluster=cluster qos=< {{ user_qos_input }} >"
