@@ -1,18 +1,18 @@
 --- 
-- 
-  hosts: all
+
+- hosts: all
   name: "Create Users"
-  tasks: ~
-- 
-  name: "create user"
+  tasks: 
+
+- name: "create user"
   user: 
     createhome: true
     home: "{{ nas_path }} / {{ user_id }} "
     name: "{{ user_id }}"
     shell: /bin/bash
     state: present
-- 
-  name: "Add user to docker"
+
+- name: "Add user to docker"
   user: 
     name: "{{ user_id }}"
     state: present
@@ -20,7 +20,7 @@
       - "{{ docker_access is true }}"
       - "'slurmexechosts' in group_names "
       - "'slurmservers' in group_names "
-- 
-  command: "sacctmgr create user name=< {{ user_id }} > cluster=cluster qos=< {{ user_qos_input }} >"
-  name: "Add linux ID to slurm cluster"
+
+- name: "Add linux ID to slurm cluster"
   when: "'slurmservers' in group_names "
+  command: "sacctmgr create user name=< {{ user_id }} > cluster=cluster qos=< {{ user_qos_input }} >"
