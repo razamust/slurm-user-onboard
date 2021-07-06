@@ -15,7 +15,7 @@
     state: present
     group: docker
     when: 
-      -  docker_access == "{{ true }}"
+      -  "{{ docker_access is true }}"
       
         
 - name: "Add linux ID to slurm cluster"
