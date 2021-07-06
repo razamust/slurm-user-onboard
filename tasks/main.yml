@@ -9,7 +9,7 @@
     state: present
     
 - name: Add user to docker
-  user: 
+  ansible.builtin.user: 
     name: "{{ user_id }}"
     shell: /bin/bash
     state: present
