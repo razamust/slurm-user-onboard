@@ -8,9 +8,10 @@
     shell: /bin/bash
     state: present
     
-- name: "Add user to docker"
+- name: Add user to docker
   user: 
     name: "{{ user_id }}"
+    shell: /bin/bash
     state: present
     when: 
       - "'slurmcompute01' in group_names "
