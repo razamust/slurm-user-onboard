@@ -13,6 +13,7 @@
     name: "{{ user_id }}"
     shell: /bin/bash
     state: present
+    group: docker
     when: 
       - "'slurmcompute01' in group_names "
       - "'slurmcontroller' in group_names "
