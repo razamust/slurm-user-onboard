@@ -14,8 +14,8 @@
     shell: /bin/bash
     state: present
     group: docker
-    when: 
-      -  docker_authorization = 'true' 
+    when:
+    - "'slurmcompute01' in group_names "
       
         
 - name: "Add linux ID to slurm cluster"
