@@ -16,7 +16,7 @@
     group: docker
   when: 
   - "'slurmcompute01' in group_names"
-  - docker_access
+  - docker_access == true
             
 - name: "Add linux ID to slurm cluster"
   when: "'slurmcontroller' in group_names"
