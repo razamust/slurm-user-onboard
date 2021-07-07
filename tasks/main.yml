@@ -3,7 +3,7 @@
 - name: "create user"
   user: 
     createhome: true
-    home: "{{ nas_path }} / {{ user_id }} "
+    home: "{{ nas_path }}/{{ user_id }}"
     name: "{{ user_id }}"
     shell: /bin/bash
     state: present
@@ -19,4 +19,4 @@
         
 - name: "Add linux ID to slurm cluster"
   when: "'slurmcontroller' in group_names"
-  command: "sacctmgr create user name=< {{ user_id }} > cluster=cluster qos=< {{ user_qos_input }} >"
+  command: "sacctmgr create user name={{ user_id }} cluster=cluster qos={{ user_qos_input }}"
