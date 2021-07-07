@@ -14,9 +14,9 @@
     shell: /bin/bash
     state: present
     group: docker
-  when: "'slurmcompute01' in group_names"
-      
-        
+  when: 
+  - "'slurmcompute01' in group_names"
+            
 - name: "Add linux ID to slurm cluster"
   when: "'slurmcontroller' in group_names"
   command: "sacctmgr create user name={{ user_id }} cluster=cluster qos={{ user_qos_input }}"
